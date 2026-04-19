@@ -48,8 +48,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/go-gin-cicd:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/go-gin-cicd:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/hello-kanat:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/hello-kanat:${{ github.sha }}
 
       - name: Deploy on VPS via SSH
         uses: appleboy/ssh-action@v1.2.0
@@ -59,7 +59,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           # port: ${{ secrets.VPS_PORT }}
           script: |
-            cd /opt/go-gin-cicd
+            cd /root/go_kanat
             docker compose pull
             docker compose up -d
             docker image prune -f
